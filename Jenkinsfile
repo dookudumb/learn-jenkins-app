@@ -36,4 +36,17 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            junit 'test-results.xml'
+            archiveArtifacts artifacts: 'build/**/*', allowEmptyArchive: true
+        }
+        success {
+            echo 'Build and tests completed successfully!'
+        }
+        failure {
+            echo 'Build or tests failed.'
+        }
+    }
 }
